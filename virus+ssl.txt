@@ -1,0 +1,27 @@
+virus:
+	infect programs by modifying them
+	modification includes copy of the virus which can infect other programs
+	self replicating
+	VIRUS stands for: vital information resources under seige
+	host helps the virus to get into the system and execute it when triggered
+	types:
+		malicious: harmful
+		neutral: helps to neutralise the effect
+		helpful: antivirus
+
+
+SSL:
+	secure socket layer
+	lies between aplication layer and transport layer
+	ensures confidentiality, auth, integrity
+	4 protocols:
+		handshake protol(connection, auth)
+		SSL record protocol(confidentiality, integrity)
+		alert protocol
+		change cipher spec protocol
+
+		diagram:
+		handshake---change cipher--alert--http
+		SSL protocol
+		TCP
+		IP

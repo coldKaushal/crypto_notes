@@ -1,0 +1,222 @@
+CIA triad:
+	confidentiality
+	integruty
+	availability
+
+security service:
+	confidentiality
+	integrity
+	authentication
+	non repudiation
+	access control
+
+passive attack:
+	release of msg
+	traffic analysis: location, identity of communicating host, freq and length of msgs etc
+
+active attack:
+	masquerade
+	modification of msg
+	replay
+	denial of service
+
+security mechanisims are used for:
+	encipherment
+	digital signature: sign nd verify
+	data integrity: attach a small check val, receiver find the check value and matches it
+	authentication exchange: msg to prove identity
+	traffic padding
+	routing control: change routes
+	access control: user has access to data
+	notarisation: to prevent non repudiation, done via third party
+
+
+conventional:
+	usually symmetric
+	broadly 2 type:
+		substitution
+		transposition
+
+	susbtitution:
+		monoalphabetic: fixed substitutions, 1 to 1
+			caesar cipher:
+				aka shift cipher or additive cipher
+				key tells the shift, =3
+				c = (p + key)mod26
+				in general, key is given
+		polyalphabetic: no fixed, can be changed, 1 to many
+			ex:
+			vignere cipher: repeat key to match plain text
+				c = (p+k)mod26
+				p = (c-k)mod26
+				or can use table
+			verman:
+				given key has same length as plain text
+				algo same
+
+		playfair cipher:
+			write key in 5*5 matrix initially
+			firr algo
+			break plain text in pair
+			use x if both are same in pair
+			use z for pad
+			grp any 2 alpha together in matrix(usually i/j)
+
+		hill cipher:
+			C = kP(mod 26)
+			P = K-1C mod 26
+
+	Transposition:
+		rail fence:
+			keyless
+			write in diagonal
+			read horizontally
+			depends on depth needed
+
+		row transposition:
+			keyed
+			write the pt row by row(column = len(key))
+			read column by column(order of column acc to key)
+
+		double transposition:
+			keyed
+			do baar kro usko
+			key can be same or different
+
+
+stream cipher: 
+	encrypts data stream 1 bit or a byte at a time
+	symmetric
+	XOR is done typically
+	more complex
+	confusion
+	decryption is easy(just do XOR)
+	OFB CFB
+
+block cipher:
+	block of pt -> block of ct
+	64/128 bits
+	less complex
+	confusion and diffusion
+	decryption is hard
+	ECB CBC
+
+shanon's theory of confusion and diffusion:
+	so that attacker can't find key
+	diffusion + confusion
+
+	diffusion: pt -> ct
+	confusion: k -> ct
+
+	1 bit change can cause change of many bit in ct
+
+DES:
+	data encryption standard
+	64 bits
+	16 fiestal round
+
+	steps:
+		inital permutation
+		16 fiestal rounds
+		swap
+		final permutation(inverse permutation)
+	from 64 bit key we generate 56 bit master key(every 8th bit dropped)
+	every S box has different table
+
+	subkey generation
+		divide 56 bit into 2 28bit <c0, d0>
+		in both apply this:
+			rotate left by 1 bit in round 1, 2, 9, 16
+			rotate left by 2 bits in other round
+		new <c1, d1>
+		feed into predefined table to obtain the 48bit key(4-4 bits are removed)
+
+	properties:
+		avalanche effect
+			small change in pt-> large change in ct
+		completeness effect:
+			each ct bit dependent on many pt bits
+
+		confusion and diffusion
+
+	weakness:
+		keysize is 56 bit
+			can be solved by modern computers
+		weak keys: 4 out of 2^56 are weak keys(all 0, all 1, half 0 and half 1) 
+					subsequent encryption using the weak key give pt
+		semi weak keys: 6: each repeated 8 times
+		possible weak keys: 48: each repeated 4 times
+		key clustering: 2 or more diff key gen same ct from pt
+		weakness in s box: 2 separate ip into s box can produce same op
+
+multiple des:
+	doubel des:
+		use 2 diff keys
+		C = E(K2, E(K1, P))
+
+		drawback:
+			meet in middle attack
+			encrypt from 1 end and decrypt from other end
+			assume we know some <pt, ct>
+			double time to break des
+
+	3 des:
+		use 2 keys:
+			C = E(k1, D(k2, E(k1, p)))
+
+		use 3 keys
+			C = E(k3, D(k2, E(k1, p)))
+
+AES:
+	advanced encryption standard
+	symmetric
+	not broken till now
+	128block
+	not fiestal but permutation substitution
+	faster than des
+round 	bits 
+10		128
+12 		192
+14 		256
+
+	keys generated = round+1
+	block size=  128 bits = 4words
+	state matrix = 4x4 = 16bytes
+	input: as 4x4 array, cell = 4 bytes
+	state array: store output from each round words in column, rows are the expansion of words
+
+	key gen, expand keys, 4 words -> 44 words i.e. 11 keys
+
+	structure for each round:
+		all round-> 4 transformation
+		last round -> 3 transformation
+
+	transformation:
+		substitute byte
+		shift row
+		mix columns
+		add round key
+
+	last round !-> mix column
+
+	substitute:
+		each cell = 8bits
+		divide into 4-4 (row, col)
+		1 substitution table, check val in that row, col and assign
+
+	permutation:
+		shift row:
+			shift row
+			shifting acc to row no.
+			ith row = i times left shift(0 based i)
+			in decrypt towards right
+
+	mix col:
+		take 1 col, multiply by const and put that col in state matrix
+		1 col = 1 word
+
+	add round key:
+		same as mix col just XOR with 128bit key, 4x4 matrix
+
+
+
