@@ -1,0 +1,34 @@
+IPSec
+	IPsecurity
+	collection of protocols designed by IETF
+	security of packet at network layer
+	creates authenticated and confidential packets IP layer
+
+	types:
+		transport mode:
+			input from transport layer is protected
+			IP header not protected
+				transport layer op
+						|
+				IPsec-H-----IPsecPayload-----IPSec-T
+						|
+				IP-H------IPPayload
+		tunnel model
+			protects info along with IP header
+
+				IP-H-----IP-payload
+						|
+				IPSec-H----IPSec-payload-----IPSec-T
+						|
+				New-IP-H------IP-payload
+
+	2 protocols to provide auth and encryp/decryp for packets at IP layer
+		authentical header
+			provides source authentication and data integrity but not privacy
+			no encryption, only authentication using hash like md5
+
+
+		encapsulating security payload protocol
+			provides source auth, data integrity and privacy
+			encryption like des and auth using hash md5
+

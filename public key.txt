@@ -1,0 +1,150 @@
+public key cryptography:
+	asymetric
+	public and private keys
+	used for confidentiality, auth and both
+	most widely is rsa
+	2 challenge os symm key tackled:
+		secure comm without trusting kdc with ur key
+		digital signature: msg from verified user
+	6 ingredients:
+		pt, encryp algo, public and private key, ciphertext, decryp algo
+	steps:
+		create set of private and public key
+		put public key in public register
+		other person encrypt using public, receiver encrypt using private
+	how encryption:
+		sender use public key, now only the sender can decrypt
+	how auth acheievd:
+		only person with private key can generate a decryptable msg for receiver
+	to acheive both
+		combine both
+	application:
+		encryp/decrypt
+		digital sign
+		key exchange
+	knowledge of public key and samples of ct must be insufficient to decipher other key
+	PRa = private key of a
+	PUa = public key of a
+
+	reqm:
+		computationaly easy to:
+			generate PRa, PUa
+			cipher text knowing the corresponding key
+			decipher text knowing the corresponding key
+		computationaly infeasible to:
+			know PRa if know PUa
+			know PRa if know PUa and some ct
+
+
+
+
+RSA:
+	asymmetric
+	block cipher
+	pt ct are integers bw 0 and n-1 for some n
+	typical size: 1024 bits/309decimal digit
+	can perform:
+		encryp/decryp
+		key exchange
+		digital sign
+
+Diffie Hellman key exchange:
+	not an encryption algo
+	used to exchange secret key between 2 users
+	asymetric encryption to exchange secret key
+	can only do key exchange not other 2
+
+key management:
+	aim: generate secrete key bw 2 user and store it to prove the authenticity bw 2 users
+	supports:
+		key generation
+		key distribution
+		controlling use of keys
+		updating
+		destruction
+		key backup/recovery
+	
+	symmetric key distribution achieved using:
+		symmetric key encryp
+			1.)a can deliver to b physically
+			2.)third party can deliver to a and b physically
+			3.)a nd b has pervious link, a can send new key using old key
+			4.)a nd b has link to c, c can send key to a nd b using link
+		option 4 best with some variation
+		uses hierarchy of keys
+			a nd b connected to kdc, and shares a master key
+			a wants to connect to b and request kdc
+			kdc sends a session key to a and b using the master keys known to kdc and the receiver
+			using session key a sends a key to b and b receives it
+			now this session key is discarded
+
+			apart from this a can send a nonce to b, if b sends the f(nonce) back to a that means a secured channel has been established 
+		instead of 1 kdc multiple kdc in hierrachical system can be used
+
+		session key-> less time-> more frequent-> more secure
+
+		session key-> more time-> less frequent-> less secure-> less bw used
+
+		decentralised not good for a large network
+
+	symm key distribution using asymm encryp
+		1) simple secret key dstribution
+			a generates PUa and PRa and transmit a's ID to B using PUa
+
+			b transmit a new key to a using PUa
+
+			after receiving new key, a discard previous public and private key
+
+			after completion of exchange even new key is disacrded(it was a session key lol)
+
+		2.) with confiden and auth
+			a send b a's ID and nounce N1 using B's public key
+
+			b send back b's id, N1 and new Nounce N2 using PUa, 
+
+			a receies N1 meaning b successfully received it, now it send back N2 using PUb to assure b that a is its correspondant
+
+			now b send the shared key using PRb and PUa
+
+			a gets shared key using PUb and PRa
+
+
+	public key distribution:
+		public announcement
+			braodcast its public key like rsa
+			drawback: anyone can pretend to be a and can get msg from b
+		public avaiable directory:
+			a public directory maitained by trusted entity:
+			stores <name, public key>
+			more secure than announcement
+			drawback: hacker can obtain private key of firectory or temper with info kept by directory
+		public key authority
+			more secure
+			keeps public key of user
+			user knows public key of authority
+
+			a sends a request to know b's public key with a timestamp
+
+			authority responds with b's public key and time stamp encrypted with private key of auth
+
+			a receives and gets the public key of b
+
+			similarly b receives PUa
+
+			a sends b N1
+			b sends a N1 and N2
+			they verify and now assured
+		public key certificates
+			directory are vulnerable to tampering
+
+			a send public key , a's id to certificate authority
+
+			certificate authority generate a certificate for user a
+
+			a can publish this
+
+			anyone who wants to connect to a can use this certificate and can present its certificate to a for a 2 way connectivity
+
+			anyone can verify the certificate but only authrity generate and update certificates
+
+

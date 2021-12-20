@@ -1,0 +1,39 @@
+intrusion detection system:
+	passive mnitoring device
+	detects potential threats and generates alarms
+	no actual protection to endpoint or network
+
+	types:
+	NIDS:
+		network based IDS
+		monitor entire protected network
+		visibilty to all traffic flowing
+		decision based on packet metadata and content
+		detect widespread threat because of more visibilty
+		no visibilty into internals on endpoint
+
+	HIDS
+		host based IDS
+		for particular endpoints
+		against internal and external threats
+		monitor nw traffic to and fro from system only
+		limited visibilty => less context for decision making
+		deep visibilty into host internals
+
+	detection methods
+		signature detection:
+		fingerprint of know threats are used
+		if someone is detected malicious acc to list then its contents are detected. therefore no false positives
+		based on know malicious
+		blind to zero day vulnerability
+
+	anamoly detection:
+		generate threats based on the behavious of normal model
+		can detect zero-day threats
+		building a normal model is tough as it need to balance fp and fn
+
+	hybrid detction:
+		comb of both
+		low error than both
+
+comb of IDS and IPS is better

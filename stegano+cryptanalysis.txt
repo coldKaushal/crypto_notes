@@ -1,0 +1,30 @@
+steganography:
+	hide info
+	info in file/image/msg
+	steganos: covered, graphia: concealed
+	type:
+		text steganography
+		audio
+		video
+		image
+	doesnt alter the structure of data
+	final output: stego media
+	attack: stegoanalysis
+	once discovered anyone can get
+	less popular
+	technique:
+		watermarking
+		character marking
+		invisible ink
+		typewritter correction ribbon
+		pin punctures
+
+cryptanalysis:
+	art of beaking the cryptosystem
+	types:
+		ciphertext only
+		plain text only: know some pairs of <pi, ci>
+		chosen plain text attack: can get ct for a pt, feeding pi to decryptor
+		chosen chipher text: get a pi for a particular ci, like feeding ci to receiver
+
+cryptology: study of code, both creating and solving them

@@ -1,0 +1,44 @@
+firewall:
+	a firewall is a network security system that monitors and controls incoming and outgoing nw traffic based on predetermined security rules
+
+	active entity
+	like IPS(intrusion prevention system)
+	
+types:
+	packet filtering
+		rules on IP packets
+		source ip, dest ip, protocol and ports
+		action based on rule(in filter table) otherwise default action
+		at transport layer
+		simple but less secure
+
+	application level gateway
+		aka proxy server
+		more secure than packet filter
+		at application level
+		overhead is disadv
+		application gateway is service specific such as TELNET, FTP, SMTP, HTTP
+
+	circuit level gateway
+		2 TCP connection:
+			internal host to gateway
+			external host to gateway
+		security checkd done before setup
+		after setup all data is passed
+		faster than app lvl 
+
+capability of firewall:
+	single choke point to keep unauthorised user out
+	prohibits vulnerable attacks-. both in and out
+	protection from IP spoofing
+	audits and alarms can be implemented on it
+
+limitation
+	can't protect from attack that bypass it
+	can't protect from internal threats
+	can't protect over tunneling over most app protocols: virus infected program
+
+
+Network Address Translation (NAT) allows a private network to use a set of private addresses and a set of global Internet Addresses for external communication. It uses a translation table to route messages between the two networks and provides substantial security.
+
+same IP address in diff private network thus prolonged life expectancy
