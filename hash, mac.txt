@@ -1,0 +1,28 @@
+hash:
+	varaible size ip -> fixed size op
+	anybit change-> whole fn change
+	one way function
+	h = H(x)
+	h= hash calue, x= preimage of h
+
+hmac:
+	hash+ key = mac
+	key lo, size dekho, size <k then pad, >k then pass thru hash to get a k sized k
+	firr key XOR ipad, append to msg pass thru hash = h1
+	firr key XOR opad, append to h1 then pass thru hash = h2
+	pros:
+		faster
+		when public key not allowed
+		produce smaller signs
+	cons:
+		key is issue
+		not suited when receivers are many
+
+mac based on block cipher:
+	DAA= data auth algo
+		cbc mode of des
+
+	cmac:
+		cipher based mac
+		aes, triple des
+		 

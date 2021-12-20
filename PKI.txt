@@ -1,0 +1,79 @@
+PKI:
+	public key infrastructure
+	set of hw, sw, people, policies needed to create, manage, store, distribute, revoke digital certificates based on asymmetric cryptography
+
+	aim: secure, convenient and efficient acquisation of public keys
+	IETF
+	PKIX: PKI based on X.509
+	elements:
+		end entity
+		certification authority
+		Registration authority
+		CRL issuer
+		repository: method of storing certificates
+
+	func
+		registration: make known to CA
+		initialisation
+		certification
+		key pair recovery
+		key pair update: update when lifetime expires
+		revocation request: when abnormal situation
+		cross certification: CA to CA
+
+	protocol
+		RFC2510: CMP
+		RFC2797: certificate management messages over CMS
+
+kerberos:
+	third party key distribution system
+	centralised authentication server
+	authenticate user to server and server to user
+	symmetric encryption: DES
+	3 heads:
+		authenticate: vaid user
+		authorise: grant service based on authentication
+		accounting: track of consumption
+
+	reqm:
+		secure: no weak link
+		reliable
+		transparent: not aware of auth beyong password entry
+		scalable
+
+	2 approach for security:
+		simple authentication dialogue:
+			solves issue of impersonation
+			Authentication Server:
+				knows passwords of all users-> stored in centralised db
+				shares a unique secret key(S) with servers
+			Ticket:
+				<user id, nw address, server id>
+				created after auth of user
+				encrypted using S
+
+			C-> AS(IDc, Password, IDserver)
+			AS->C (ticket)
+			C->server(IDc, ticket)
+			ticket = E(S, [IDc, nw address of C, IDv])
+
+			after this if matched then server grants the service
+
+		more secure authentication dialogue:
+			password sent as plain text
+			minimise the time a user has to enter the pw, in above enter pw for every service
+
+			once per login session
+			C-> AS ( IDc, IDtgs)
+			AS->C   E(Kc, ticket tgs)
+
+			once per type of service
+			C-> TGS (IDc, IDv, Ticket tgs)
+			TGS -> C (ticket (server) )
+
+			once per service session:
+			C-> V (IDc, ticket (server))
+
+			tickets consist additonal info of TS and lifetime
+
+		
