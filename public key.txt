@@ -11,7 +11,7 @@ public key cryptography:
 	steps:
 		create set of private and public key
 		put public key in public register
-		other person encrypt using public, receiver encrypt using private
+		other person encrypt using public, receiver decrypt using private
 	how encryption:
 		sender use public key, now only the sender can decrypt
 	how auth acheievd:

@@ -21,7 +21,7 @@ intrusion detection system:
 		deep visibilty into host internals
 
 	detection methods
-		signature detection:
+	signature detection:
 		fingerprint of know threats are used
 		if someone is detected malicious acc to list then its contents are detected. therefore no false positives
 		based on know malicious

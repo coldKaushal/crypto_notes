@@ -3,7 +3,7 @@ hash:
 	anybit change-> whole fn change
 	one way function
 	h = H(x)
-	h= hash calue, x= preimage of h
+	h= hash value, x= preimage of h
 
 hmac:
 	hash+ key = mac
